@@ -33,7 +33,7 @@ If trains came every 5 minutes, or every 10 minutes, we could much more easily s
 
 With the possibility of trains coming at any suggested minute, when we store a new schedule, we may want to: sort the times chronologically, find the earliest time and the latest time, and store those. That way we have a range we can use to sort schedules before we start comparing them. Given a time, if we are not able to pull two schedules with a range that encompasses it, then we look for two schedules that start at the same earliest time. If we do not have two schedules that start at the same time, then we return no time. If we do find two or more schedules with a range that encompass the time, then we compare the lists to 
 
-**Possible solution for retrieving data**
+**POSSIBLE SOLUTION FOR RETRIEVING SIMULTANEOUS TRAIN ARRIVAL TIMES**
 
 One idea I have for accomplishing the task of getting the "next time" two or more trains arrive would be to use the range idea I proposed just above. By storing a range for each of the *current schedules*, you could:
 
