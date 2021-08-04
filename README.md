@@ -1,2 +1,4 @@
 # train-tracker
-A code challenge providing a "service to manage the schedules of the different trains that run through a station"
+A code challenge.
+
+Provides "a service to manage the schedules of different trains that run through a station."
