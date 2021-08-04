@@ -39,7 +39,7 @@ One idea I have for accomplishing the task of getting the "next time" two or mor
 
 * Look for schedules that have a range which contain the timestamp argument you recieve. 
 
-* We are looking to return *two* or more trains that arrive at the same time, otherwise we return none. So now that we have all schedules ids, their ranges, and their schedule lists, we look into each lists for all the times that come *just next* after the timestamp argument we recieved. 
+* We are looking to return *two* or more trains that arrive at the same time, otherwise we return none. So now that we have all schedules ids, their ranges, and their schedule lists, we look into each list for all the times that come *just next* after the timestamp argument we recieved. I would use a reduce to filter for this and return a list of tuples containing the schedule id and schedules. This list would then be used to count.....
 
 * If the number of lists (schedules) that contain a matching "just next" time is two or greater than two, we return those two or more schedules. 
 
