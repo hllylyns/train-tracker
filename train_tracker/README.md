@@ -1,10 +1,10 @@
-# TrainTracker
-
 🚂 **The Train Tracker**
+
 Track and manage train schedules
 
 
 **MY ASSUMPTIONS:**
+
 From the language: 
 * ”runs through this station”: we are concerned with THIS station. We are writing a schedule manager for one station for now, and not multiple stations. 
 * in creating the capability to post a ”list of times when this particular train arrives at this station”: this provides another confirmation that we are concerned with THIS station and not more than one station. 
@@ -25,6 +25,7 @@ To simplify things:
 
 
 **THINGS TO CONSIDER**
+
 How can we make it so that we do not have to scan through every current schedule? This solution isn’t very performant if we have to compare all the current schedules every time we GET stuff.
 
 Can we group train lines by schedule instead? 
@@ -32,10 +33,26 @@ If trains came every 5 minutes, or every 10 minutes, we could much more easily s
 
 With the possibility of trains coming at any suggested minute, when we store a new schedule, we may want to: sort the times chronologically, find the earliest time and the latest time, and store those. That way we have a range we can use to sort schedules before we start comparing them. Given a time, if we are not able to pull two schedules with a range that encompasses it, then we look for two schedules that start at the same earliest time. If we do not have two schedules that start at the same time, then we return no time. If we do find two or more schedules with a range that encompass the time, then we compare the lists to 
 
+**Possible solution for retrieving data**
+
+One idea I have for accomplishing the task of getting the "next time" two or more trains arrive would be to use the range idea I proposed just above. By storing a range for each of the *current schedules*, you could:
+
+Look for schedules that have a range which contain the timestamp argument you recieve. 
+
+We are looking to return *two* or more trains that arrive at the same time, otherwise we return none. So now that we have all schedules in range, we look for all the times that come *just next* after the timestamp argument we recieved. 
+
+If the number of lists (schedules) that contain a matching "just next" time is greater than two, we return those two schedules. 
+
+If we do not find two or more, we now must obtain all the current schedules with a start time earlier than the timestamp argument. 
+
+From those schedules we will have to look for the earliest matching start time. In order to return two times or none, I think the fastest way to get there would be to sort the schedules by range, chronologically so that the first schedule you'd find in sorted list would be the earliest time. We now look to see if the second schedule in the list matches. If it does, we return those two schedules. If it does not, we continue the loop and look at the next schedule to see if the start time matches. 
+
 
 **DOMAINS**
-Train_lines - uid, name (string with four alphanumeric characters)
-Schedule - we are concerned with the current schedule for now. Past schedules on a line are going to be available in this architecture as well. This is a list. 
+
+*Train_lines* - uid, name (string with four alphanumeric characters)
+
+*Schedule* - we are concerned with the current schedule for now. Past schedules on a line are going to be available in this architecture as well. This is a list. 
 
 
 
